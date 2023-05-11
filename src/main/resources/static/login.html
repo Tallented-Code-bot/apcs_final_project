@@ -10,9 +10,10 @@
     <h1>Log in</h1>
     <p>Don't have an account? <a href="/signup.html">Sign Up</a></p>
 
-    <form action="">
-        Username:<br/> <input type="text"/><br/><br/>
-        Password:<br/> <input type="password"/><br/><br/>
+    <form action="/login", method="post">
+        Username:<br/> <input type="text" name="username"/><br/><br/>
+        Password:<br/> <input type="password" name="password"/><br/><br/>
+        <input type="submit" value="Submit"/>
     </form>
 </body>
 </html>
