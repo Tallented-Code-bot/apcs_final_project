@@ -30,3 +30,9 @@ Endpoints:
 - signup
 - GET user
 - POST sendmoney
+
+
+
+# Notes
+
+- [Article on Spring Security](https://www.marcobehler.com/guides/spring-security)
