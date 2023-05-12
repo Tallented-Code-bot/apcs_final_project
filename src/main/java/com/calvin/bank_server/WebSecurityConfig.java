@@ -14,23 +14,26 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class WebSecurityConfig {
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((req) -> req.requestMatchers("/","/home","/index.html","/signup.html").permitAll().anyRequest().authenticated())
-            .formLogin((form) -> form.loginPage("/login.html").permitAll())
-            .logout((logout) -> logout.permitAll());
+                .authorizeHttpRequests((req) -> req
+                        .requestMatchers("/", "/home", "/index.html", "/signup.html")
+                        .permitAll().anyRequest().authenticated())
+                .formLogin((form) -> form
+                        .loginPage("/login.html")
+                        .permitAll())
+                .logout((logout) -> logout.permitAll());
 
         return http.build();
     }
 
-
     @Bean
-    public UserDetailsService userDetailsService(){
+    public UserDetailsService userDetailsService() {
         UserDetails user = User.withDefaultPasswordEncoder()
-        .username("calvin")
-        .password("password")
-        .roles("USER")
-        .build();
+                .username("calvin")
+                .password("password")
+                .roles("USER")
+                .build();
 
         return new InMemoryUserDetailsManager(user);
     }
