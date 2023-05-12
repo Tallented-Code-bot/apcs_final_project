@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
     <head>
         <title>Home - Bank</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,7 +8,7 @@
         <h1>Bank Main Page</h1>
         <br>
         <br>
-        <a href="/signup.html">Create a new account</a> <br/><br/>
-        <a href="/login.html">Log in</a>
+        <a th:href="@{/signup}">Create a new account</a> <br/><br/>
+        <a th:href="@{/login}">Log in</a>
     </body>
 </html>

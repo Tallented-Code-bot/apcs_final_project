@@ -17,10 +17,11 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((req) -> req
-                        .requestMatchers("/", "/home", "/index.html", "/signup.html")
+                        .requestMatchers("/", "/home", "/index", "/signup")
                         .permitAll().anyRequest().authenticated())
+                // .formLogin(withDefaults())
                 .formLogin((form) -> form
-                        .loginPage("/login.html")
+                        .loginPage("/login")
                         .permitAll())
                 .logout((logout) -> logout.permitAll());
 
@@ -37,5 +38,15 @@ public class WebSecurityConfig {
 
         return new InMemoryUserDetailsManager(user);
     }
+
+
+
+//     public InternalResourceViewResolver internalResourceViewResolver(){
+//         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//         resolver.setSuffix(".html");
+//         resolver.setPrefix("");
+//         // resolver.setPrefix("static/");
+//         return resolver;
+//     }
 
 }
