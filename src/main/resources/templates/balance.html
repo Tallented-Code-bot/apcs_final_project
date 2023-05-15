@@ -10,5 +10,11 @@
     <h1>Balance</h1>  
 
     <p>This is a protected page.  It should not be accessible unless you are logged in.</p>
+
+
+    <p>
+        Hello, <span>[[${#request.remoteUser}]]</span>
+        <!--span th:text="${#authentication.getPrinciple().getUser().getUsername()}"></span-->
+    </p>
 </body>
 </html>

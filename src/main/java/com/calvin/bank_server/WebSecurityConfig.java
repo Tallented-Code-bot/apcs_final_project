@@ -15,13 +15,15 @@ public class WebSecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((req) -> req
-                        .requestMatchers("/", "/home", "/index", "/signup","/allusers","/newuser")
-                        .permitAll()/* .anyRequest().authenticated()*/)
+                        .requestMatchers("/", "/home", "/index", "/signup","/allusers","/newuser","/403","/404").permitAll()
+                        .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                        .anyRequest().authenticated())
                         
                 // .formLogin(withDefaults())
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .permitAll())
+                // .exceptionHandling().accessDeniedPage("/403").and()
                 .logout((logout) -> logout.permitAll())
                 .csrf().disable();
                 

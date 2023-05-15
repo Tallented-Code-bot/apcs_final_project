@@ -13,6 +13,9 @@ public class BankUser {
     private String password;
     private String role;
 
+    /** The balance of the user, in cents. */
+    private long balance;
+
     BankUser() {
     }
 
@@ -20,6 +23,14 @@ public class BankUser {
         this.username = name;
         this.password = password;
         this.role = "ROLE_USER";
+        this.balance = 0;
+    }
+
+    BankUser(String name, String password, String role){
+        this.username = name;
+        this.password = password;
+        this.role = role;
+        this.balance = 0;
     }
 
     public String getUsername() {
@@ -53,6 +64,24 @@ public class BankUser {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setCents(long cents){
+        this.balance = cents;
+    }
+
+    public long getCents() {
+        return balance;
+    }
+
+    public double getDollars(){
+        return (double) balance / 100;
+    }
+
+    public void setDollars(double dollars){
+        this.balance = (long) (dollars * 100);
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
