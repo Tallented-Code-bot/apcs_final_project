@@ -9,19 +9,21 @@ import jakarta.persistence.Id;
 @Entity
 public class BankUser {
     private @Id @GeneratedValue Long id;
-    private String name;
+    private String username;
     private String password;
+    private String role;
 
     BankUser() {
     }
 
     BankUser(String name, String password) {
-        this.name = name;
+        this.username = name;
         this.password = password;
+        this.role = "ROLE_USER";
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public String getPassword() {
@@ -32,16 +34,24 @@ public class BankUser {
         return id;
     }
 
+    public String getRole() {
+        return role;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String name) {
+        this.username = name;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
@@ -53,18 +63,18 @@ public class BankUser {
             return false;
         }
         BankUser u = (BankUser) o;
-        return Objects.equals(this.id, u.id) && Objects.equals(this.name, u.name)
-                && Objects.equals(this.password, u.password);
+        return Objects.equals(this.id, u.id) && Objects.equals(this.username, u.username)
+                && Objects.equals(this.password, u.password) && Objects.equals(this.role,u.role);
     }
 
 
     @Override
     public int hashCode(){
-        return Objects.hash(this.id, this.name, this.password);
+        return Objects.hash(this.id, this.username, this.password, this.role);
     }
 
     @Override
     public String toString(){
-        return "User{id=" +this.id +", name=\"" + this.name + "\", password=\"" + this.password +"\"}";
+        return "User{id=" +this.id +", name=\"" + this.username + "\", password=\"" + this.password + ", role = \"" + role +"\"}";
     }
 }
