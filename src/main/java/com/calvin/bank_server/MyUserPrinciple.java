@@ -29,6 +29,10 @@ public class MyUserPrinciple implements UserDetails{
         return user.getUsername();
     }
 
+    public double getBalance(){
+        return user.getDollars();
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         // accounts do not expire

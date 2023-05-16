@@ -20,6 +20,7 @@ public class LoadUserRepository {
         return args -> {
             log.info("Preloading " + repository.save(new BankUser("calvin",encoder.encode("test"),"ROLE_ADMIN")));
             log.info("Preloading "+repository.save(new BankUser("austin",encoder.encode("another_test"))));
+            log.info("Preloading "+repository.save(new BankUser("teller",encoder.encode("password"),"ROLE_TELLER")));
         };
     }
 }

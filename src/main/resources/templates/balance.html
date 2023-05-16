@@ -13,8 +13,9 @@
 
 
     <p>
-        Hello, <span>[[${#request.remoteUser}]]</span>
-        <!--span th:text="${#authentication.getPrinciple().getUser().getUsername()}"></span-->
+        <!-- Hello, <span sec:authentication="name"></span> -->
+        Hello, <span th:text="${username}"></span>.
+
     </p>
 </body>
 </html>
