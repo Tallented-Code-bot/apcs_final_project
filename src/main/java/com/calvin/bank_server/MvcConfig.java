@@ -5,6 +5,7 @@ import java.security.Principal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 // @Configuration
 @Controller
@@ -16,6 +17,14 @@ public class MvcConfig /* implements WebMvcConfigurer */ {
     // registry.addViewController("/balance").setViewName("balance");
     // registry.addViewController("/admin").setViewName("admin");
     // }
+
+
+    private UserRepository repository;
+
+
+    public MvcConfig(UserRepository repository){
+        this.repository = repository;
+    }
 
     @GetMapping("/")
     public String index() {
@@ -50,5 +59,16 @@ public class MvcConfig /* implements WebMvcConfigurer */ {
     @GetMapping("/teller")
     public String teller(){
         return "teller";
+    }
+
+
+    @GetMapping("/teller/search")
+    public String tellerUser(@RequestParam(value="username") String username, ModelMap model){
+        //model.addAttribute("username",username);
+
+        BankUser user = repository.findByUsername(username);
+        model.addAttribute("user",user);
+
+        return "tellerUser";
     }
 }

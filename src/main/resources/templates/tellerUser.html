@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${user.username}"></title>
+</head>
+<body>
+
+    <h1 th:text="|${user.username}'s balance|">User</h1>
+    <a href="/teller">Back to teller homepage</a> <br><br>
+
+    Balance: $<span th:text="${user.dollars}">0</span> <br>
+
+    <br><br><br>
+
+
+    <form>
+        <label for="amount">Amount: </label>
+        <input name="amount" id="amount" type="number" placeholder="0"> <br>
+        <label for="withdraw">Withdraw</label>
+        <input type="radio" id="withdraw" name="withdraw_deposit" value="Withdraw">
+        <label for="deposit">Deposit</label>
+        <input type="radio" id="deposit" name="withdraw_deposit" value="Deposit"> <br><br>
+        <input type="submit" name="submit" value="Submit">
+    </form>
+    
+</body>
+</html>

@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -38,6 +39,13 @@ public class FileController {
         u.setPassword(encoder.encode(user.getPassword()));
         u.setRole("ROLE_USER");
         return repository.save(u);
+    }
+
+
+
+    @PostMapping("/deposit")
+    public void deposit(@RequestParam(value="withdraw_deposit") String withdraw_deposit,@RequestParam(value="amount") int amount){
+         
     }
 
 }
