@@ -18,7 +18,7 @@ public class LoadUserRepository {
     @Bean
     CommandLineRunner initDatabase(UserRepository repository){
         return args -> {
-            log.info("Preloading " + repository.save(new BankUser("calvin",encoder.encode("test"),"ROLE_ADMIN")));
+            log.info("Preloading " + repository.save(new BankUser("calvin",encoder.encode("test"),"ROLE_ADMIN",54)));
             log.info("Preloading "+repository.save(new BankUser("austin",encoder.encode("another_test"))));
             log.info("Preloading "+repository.save(new BankUser("teller",encoder.encode("password"),"ROLE_TELLER")));
         };

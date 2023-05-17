@@ -32,6 +32,14 @@ public class BankUser {
         this.role = role;
         this.balance = 0;
     }
+    
+    BankUser(String name, String password, String role,double balance){
+        this.username = name;
+        this.password = password;
+        this.role = role;
+        this.balance = 0;
+        this.setDollars(balance);
+    }
 
     public String getUsername() {
         return username;

@@ -1,10 +1,13 @@
 package com.calvin.bank_server;
 
 import java.security.Principal;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 // @Configuration
@@ -64,11 +67,26 @@ public class MvcConfig /* implements WebMvcConfigurer */ {
 
     @GetMapping("/teller/search")
     public String tellerUser(@RequestParam(value="username") String username, ModelMap model){
-        //model.addAttribute("username",username);
-
-        BankUser user = repository.findByUsername(username);
-        model.addAttribute("user",user);
+        List<BankUser> users = repository.findAll();
+        System.out.println("The user array is " + users);
+        model.addAttribute("users",users);
 
         return "tellerUser";
     }
+
+
+
+
+    @GetMapping("/users/{id}")
+    public String user(@PathVariable(value="id") long id, ModelMap model){
+        // Optional<BankUser> user = repository.findById(id);
+        BankUser user = repository.findById(id).orElse(null);
+
+
+
+        model.addAttribute("user",user);
+
+        return "user";
+    }    
+    
 }
