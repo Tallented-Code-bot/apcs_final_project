@@ -1,7 +1,13 @@
 package com.calvin.bank_server;
 
+// import java.net.http.HttpHeaders;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,11 +15,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 public class FileController {
 
     private final UserRepository repository;
+    private Logger logger = LoggerFactory.getLogger(FileController.class);
 
     private PasswordEncoder encoder;
 
@@ -33,29 +43,47 @@ public class FileController {
     }
 
     @PostMapping("/signup")
-    public BankUser signup(@RequestBody BankUser user){
+    public BankUser signup(@RequestBody BankUser user) {
         BankUser u = new BankUser();
 
         u.setUsername(user.getUsername());
         u.setPassword(encoder.encode(user.getPassword()));
         u.setRole("ROLE_USER");
+        logger.info("Creating new user "+ u);
         return repository.save(u);
     }
 
-
-
     @PostMapping("/users/{id}/deposit")
-    public void deposit(@PathVariable(value="id") long id, @RequestParam(value="withdraw_deposit") String withdraw_deposit,@RequestParam(value="amount") int amount){
+    public ResponseEntity<String> deposit(@PathVariable(value = "id") long id,
+            @RequestParam(value = "withdraw_deposit") String withdraw_deposit,
+            @RequestParam(value = "amount") int amount,
+            HttpServletRequest request) {
         BankUser user = repository.getReferenceById(id);
 
-
-
-        if(user != null){
-            switch(withdraw_deposit) {
-                case "Withdraw":  
-                case "Deposit": 
+        if (user != null) {
+            switch (withdraw_deposit) {
+                case "Withdraw":
+                    if (amount > user.getDollars()) {
+                        // cannot withdraw more than you have
+                        return ResponseEntity.status(422).body("Cannot withdraw more than you have");
+                    }
+                    user.setDollars(user.getDollars() - amount);
+                    break;
+                case "Deposit":
+                    user.setDollars(user.getDollars() + amount);
+                    break;
             }
+
+            repository.save(user);
         }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location","/users/"+id);
+
+        return new ResponseEntity<String>(headers,HttpStatus.FOUND);
+
+        // return ResponseEntity.status(302).body("/users/" + id);
+        // return ResponseEntity.ok().build();
     }
 
 }

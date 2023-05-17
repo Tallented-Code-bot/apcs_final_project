@@ -16,7 +16,7 @@
     <br><br><br>
 
 
-    <form>
+    <form th:action="@{/users/{id}/deposit(id=${user.id})}" method=post>
         <label for="amount">Amount: </label>
         <input name="amount" id="amount" type="number" placeholder="0"> <br>
         <label for="withdraw">Withdraw</label>
