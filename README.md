@@ -1,6 +1,26 @@
 # AP Computer Science Final Project
 
+
+This program is a simple bank application. It supports creating accounts,
+authentication, multiple different roles, and withdrawing and depositing money.
+
+To authenticate, the user must provide their username and password which they
+provided when they created their account. Without being logged in they are only
+allowed to view a few pages: the main page, and the login and signup pages.
+
+Users are not allowed to deposit or withdraw money on their own. Instead, a bank
+teller must log in and perform the deposit or withdrawal for the user.
+
+
+
+
+
+
+
 ## Usage
+Make sure you have Java 17 - it will not work with Java 20.
+
+
 ```bash
 git clone https://github.com/Tallented-Code-bot/apcs_final_project
 cd apcs_final_project
@@ -12,42 +32,3 @@ cd apcs_final_project
 Then go to http://localhost:8080/
 
 
-
-
-
-## Requirements
-```
-Perhaps the simplest software that you can work with is the one that allows you to deal with bank accounts and transactions regarding it. Designing a robust system that allows you to engage in transactions is something that every beginner should get started with.
-
-The proposed system is a web-based project that allows you to do everything a bank would allow you to do naturally. One should be able to deposit money and withdraw money from a particular account as the user desires.
-
-There should be a validation to allow only a particular amount of cash inflows at any time, as well as to allow withdrawals if the balance is sufficient. There should also be the calculation of interest and its addition to the balance every month.
-
-There can be multiple improvements for this project, including adding support for multiple types of accounts.
-```
-
-
-## Design
-
-Functions:
-- Create new user
-- View user
-- Log in to account
-- View balance
-- Send money to another account.  Cannot send 
-  more than you have. 
-- Request money from others?
-
-
-Endpoints:
-- GET balance
-- login
-- signup
-- GET user
-- POST sendmoney
-
-
-
-# Notes
-
-- [Article on Spring Security](https://www.marcobehler.com/guides/spring-security)
