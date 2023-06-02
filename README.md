@@ -1,5 +1,20 @@
 # AP Computer Science Final Project
 
+## Usage
+```bash
+git clone https://github.com/Tallented-Code-bot/apcs_final_project
+cd apcs_final_project
+./gradlew.bat build
+./gradlew.bat bootRun
+```
+
+
+Then go to http://localhost:8080/
+
+
+
+
+
 ## Requirements
 ```
 Perhaps the simplest software that you can work with is the one that allows you to deal with bank accounts and transactions regarding it. Designing a robust system that allows you to engage in transactions is something that every beginner should get started with.

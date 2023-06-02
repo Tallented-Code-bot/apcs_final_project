@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Balance</title>
+    <title>Balance</title>
 </head>
 <body>
-    <h1>Balance</h1>  
 
-    <p>This is a protected page.  It should not be accessible unless you are logged in.</p>
+    <h1 th:text="|${username}'s balance|">User</h1>
 
+    Balance: $<span th:text="${balance}">0</span> <br>
 
-    <p>
-        <!-- Hello, <span sec:authentication="name"></span> -->
-        Hello, <span th:text="${username}"></span>.
-
-    </p>
+    <br><br><br>
 </body>
 </html>

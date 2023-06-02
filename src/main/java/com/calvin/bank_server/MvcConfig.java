@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,10 +46,15 @@ public class MvcConfig /* implements WebMvcConfigurer */ {
     }
 
     @GetMapping("/balance")
-    public String balance(ModelMap model, Principal principal) {
-        String name = principal.getName();
+    public String balance(ModelMap model/*, Principal principal*/,MyUserPrinciple user) {
+        // String name = principal.getName();
+        String name = user.getUsername();
+        double balance = user.getBalance();
+        
+
 
         model.addAttribute("username", name);
+        model.addAttribute("balance", balance);
         System.out.println(name);
         return "balance";
     }

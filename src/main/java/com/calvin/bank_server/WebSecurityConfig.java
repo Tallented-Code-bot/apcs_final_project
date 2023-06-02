@@ -18,6 +18,7 @@ public class WebSecurityConfig {
                         .requestMatchers("/", "/home", "/index", "/signup","/allusers","/newuser","/403","/404").permitAll()
                         .requestMatchers("/teller").hasAnyAuthority("ROLE_TELLER","ROLE_ADMIN")
                         .requestMatchers("/admin").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/users/*").hasAnyAuthority("ROLE_TELLER","ROLE_ADMIN")
                         .anyRequest().authenticated())
                         
                 // .formLogin(withDefaults())
