@@ -7,13 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,15 +46,20 @@ public class FileController {
         return repository.findAll();
     }
 
-    @PostMapping("/signup")
-    public BankUser signup(@RequestBody BankUser user) {
-        BankUser u = new BankUser();
+    // @PostMapping("/signup")
+    @PostMapping(value="/signup", headers="Accept=application/x-www-form-urlencoded"
+    /*produces=MediaType.APPLICATION_JSON_VALUE*/)
+    public ResponseEntity<String> signup(BankUser user) {
 
-        u.setUsername(user.getUsername());
-        u.setPassword(encoder.encode(user.getPassword()));
-        u.setRole("ROLE_USER");
-        logger.info("Creating new user "+ u);
-        return repository.save(u);
+        logger.info("Creating new user " + user);
+        repository.save(new BankUser(user.getUsername(),encoder.encode(user.getPassword()),"ROLE_USER"));
+
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Location","/login");
+
+        return new ResponseEntity<String>(headers,HttpStatus.FOUND);
+
     }
 
     @PostMapping("/users/{id}/deposit")

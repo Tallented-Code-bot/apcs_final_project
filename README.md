@@ -31,4 +31,10 @@ cd apcs_final_project
 
 Then go to http://localhost:8080/
 
+## Default Users
 
+| Username | Password | Role        |
+| -------- | -------- | ----------- |
+| admin    | admin    | ROLE_ADMIN  |
+| teller   | teller   | ROLE_TELLER |
+| user     | password | ROLE_USER   |
