@@ -1,11 +1,13 @@
 package com.calvin.bank_server;
 
+import java.nio.file.attribute.UserPrincipal;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,16 +48,18 @@ public class MvcConfig /* implements WebMvcConfigurer */ {
     }
 
     @GetMapping("/balance")
-    public String balance(ModelMap model/*, Principal principal*/,MyUserPrinciple user) {
-        // String name = principal.getName();
-        String name = user.getUsername();
-        double balance = user.getBalance();
+    public String balance(ModelMap model, Principal principal) {
+        String name = principal.getName();
         
+
+        BankUser u = repository.findByUsername(name);
+        double balance = u.getDollars();
+        String role = u.getRole();
 
 
         model.addAttribute("username", name);
         model.addAttribute("balance", balance);
-        System.out.println(name);
+        model.addAttribute("role",role);
         return "balance";
     }
 
